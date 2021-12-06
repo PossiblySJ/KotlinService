@@ -23,6 +23,10 @@ data class Shop (
 
     @Column
     @LastModifiedDate
-    var lastUpdated: LocalDateTime?= null
+    var lastUpdated: LocalDateTime?= null,
+
+    @OneToMany(cascade=[CascadeType.ALL])
+    @JoinColumn(name = "store_id")
+    var addressPeriod : List<AddressPeriod>?= null
 
 )

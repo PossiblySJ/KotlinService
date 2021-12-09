@@ -20,7 +20,7 @@ class StoreController {
     @Autowired
     lateinit var shopRepo: ShopRepo
 
-    @PostMapping("/stores")
+    @PostMapping(ALL_STORES)
     fun save(@RequestBody shop: Shop):String{
         shop.createdAt = LocalDateTime.now()
         shop.lastUpdated = LocalDateTime.now()

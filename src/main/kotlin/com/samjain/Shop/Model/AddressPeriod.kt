@@ -1,5 +1,7 @@
 package com.samjain.Shop.Model
 
+import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -9,9 +11,9 @@ class AddressPeriod {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long=0
     @Column
-    var dateValidFrom:String?=null
+    var dateValidFrom:LocalDate?=null
     @Column
-    var dateValidUntill:String?=null
+    var dateValidUntil:LocalDate?=null
     @OneToOne(cascade = [CascadeType.ALL])
     @JoinColumn(name = "fk_storeAddress_id")
     var shopAddress : ShopAddress?=null

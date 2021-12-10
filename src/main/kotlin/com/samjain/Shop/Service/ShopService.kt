@@ -1,10 +1,13 @@
 package com.samjain.Shop.Service
 
+import com.samjain.Shop.Exceptions.NullInputFieldException
 import com.samjain.Shop.Model.Shop
 import com.samjain.Shop.Repo.ShopRepo
+import com.samjain.Shop.Validations.Validation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @Service
@@ -12,9 +15,12 @@ class ShopService {
     @Autowired
     lateinit var shopRepo: ShopRepo
 
+    @Autowired
+    lateinit var validation: Validation
+
     fun getShops(refDate:String?,FutureFlag:Boolean): List<Shop>{
 
-        var date = LocalDate.parse(refDate, DateTimeFormatter.ISO_DATE)
+        val date:LocalDate?=validation.validDateFormat(refDate)
         var result= shopRepo.findAll()
         if(result.isEmpty())
         {
@@ -50,6 +56,21 @@ class ShopService {
 
     fun getShopById(shopId: Long): Shop{
         return shopRepo.getById(shopId)
+    }
+
+    fun addShop(shop: Shop): String {
+
+        shop.createdAt = LocalDateTime.now()
+        shop.lastUpdated = LocalDateTime.now()
+        if( validation.validData(shop))
+        {
+            shopRepo.save(shop)
+            return "Saved"}
+        else
+        {  throw NullInputFieldException()
+        }
+
+
     }
 
 }

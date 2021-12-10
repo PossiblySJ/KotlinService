@@ -12,6 +12,7 @@ import java.time.LocalDateTime
 
 @RestController
 //@RequestMapping("store-service/v1")
+
 class StoreController {
 
     @Autowired
@@ -22,15 +23,15 @@ class StoreController {
 
     @PostMapping(ALL_STORES)
     fun save(@RequestBody shop: Shop):String{
-        shop.createdAt = LocalDateTime.now()
-        shop.lastUpdated = LocalDateTime.now()
-        shopRepo.save(shop)
-        return "Saved"
+        return shopService.addShop(shop)
     }
 
     @GetMapping(ALL_STORES)
     fun getShop(@RequestParam(required = false)refDate:String?=null,@RequestParam(required = false)futureFlag:Boolean=false): List<Shop>{
         println("$refDate  $futureFlag")
+        if (refDate==null){
+            return shopRepo.findAll()
+        }
         return shopService.getShops(refDate,futureFlag)
     }
 

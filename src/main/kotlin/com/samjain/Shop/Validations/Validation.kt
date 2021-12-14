@@ -11,7 +11,8 @@ import java.time.format.DateTimeFormatter
 @Service
 class Validation  (val shopRepo: ShopRepo){
     fun validData(shop: Shop):Boolean
-    {  val addressPeriod:List<AddressPeriod>? =shop.addressPeriod
+    {
+        val addressPeriod:List<AddressPeriod>? =shop.addressPeriod
         if(shop.name==null||shop.status==null||shop.addressPeriod!!.isEmpty())
 
         {
@@ -28,8 +29,10 @@ class Validation  (val shopRepo: ShopRepo){
                 return false
             }
         }
+
         var result=shopRepo.findAll()
-        for(data in result)
+
+        /*for(data in result)
         {
             if(data.name==shop.name)
             {
@@ -37,10 +40,14 @@ class Validation  (val shopRepo: ShopRepo){
 
             }
         }
+*/
+        /*result.forEach{
+            if(it.name==shop.name)
 
+        }
+
+         */
         return true
-
-
 
 
     }

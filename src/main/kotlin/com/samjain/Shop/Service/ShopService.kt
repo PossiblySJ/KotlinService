@@ -18,9 +18,10 @@ class ShopService {
     @Autowired
     lateinit var validation: Validation
 
-    fun getShops(refDate:String?,FutureFlag:Boolean): List<Shop>{
+    fun getShops(refDate:String?,FutureFlag:Boolean): List<Any>{
+        return shopRepo.getShop()
 
-        val date:LocalDate?=validation.validDateFormat(refDate)
+        /*val date:LocalDate?=validation.validDateFormat(refDate)
         var result= shopRepo.findAll()
         if(result.isEmpty())
         {
@@ -34,7 +35,7 @@ class ShopService {
         } else {
 
             currentRecords(result, date)
-        }
+        }*/
 
     }
 

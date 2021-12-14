@@ -27,10 +27,10 @@ class StoreController {
     }
 
     @GetMapping(ALL_STORES)
-    fun getShop(@RequestParam(required = false)refDate:String?=null,@RequestParam(required = false)futureFlag:Boolean=false): List<Shop>{
+    fun getShop(@RequestParam(required = false)refDate:String?=null,@RequestParam(required = false)futureFlag:Boolean=false): List<Any>{
         println("$refDate  $futureFlag")
         if (refDate==null){
-            return shopRepo.findAll()
+            return shopRepo.getShop()
         }
         return shopService.getShops(refDate,futureFlag)
     }

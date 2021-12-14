@@ -19,10 +19,11 @@ class ShopService {
     lateinit var validation: Validation
 
     fun getShops(refDate:String?,FutureFlag:Boolean): List<Any>{
-        return shopRepo.getShop()
+        val date:LocalDate?=validation.validDateFormat(refDate)
+        return shopRepo.getShop(date,FutureFlag)
 
-        /*val date:LocalDate?=validation.validDateFormat(refDate)
-        var result= shopRepo.findAll()
+
+        /*var result= shopRepo.findAll()
         if(result.isEmpty())
         {
             throw NoSuchElementException()
@@ -39,7 +40,7 @@ class ShopService {
 
     }
 
-    fun currentRecords(result: List<Shop>, date: LocalDate): List<Shop>{
+    /*fun currentRecords(result: List<Shop>, date: LocalDate): List<Shop>{
         for(data in result)
         {
             data.addressPeriod=data.addressPeriod!!.filter{filterData->(filterData.dateValidFrom!! <=date&&(filterData.dateValidUntil==null||filterData.dateValidUntil!!>=date)||(filterData.dateValidFrom!! >=date&&(filterData.dateValidUntil==null||filterData.dateValidUntil!!>=date)))}
@@ -53,7 +54,7 @@ class ShopService {
             data.addressPeriod=data.addressPeriod!!.filter{filterData->(filterData.dateValidFrom!! <=date&&(filterData.dateValidUntil==null||filterData.dateValidUntil!!>=date)||(filterData.dateValidFrom!! >=date&&(filterData.dateValidUntil==null||filterData.dateValidUntil!!>=date)))}
         }
         return result
-    }
+    }*/
 
     fun getShopById(shopId: Long): Shop{
         return shopRepo.getById(shopId)

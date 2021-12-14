@@ -55,11 +55,12 @@ class Validation  (val shopRepo: ShopRepo){
 
 
     fun validDateFormat(refDate: String?): LocalDate? {
-        var date: LocalDate? = null
-        if (refDate != null) {
-            date = LocalDate.parse(refDate, DateTimeFormatter.ISO_DATE)
-            return date
+
+        return if (refDate != null) {
+             LocalDate.parse(refDate, DateTimeFormatter.ISO_DATE)
         }
-        return date
+        else {
+            LocalDate.now()
+        }
     }
 }
